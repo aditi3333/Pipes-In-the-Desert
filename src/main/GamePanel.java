@@ -1,6 +1,7 @@
 package main;
 
 import Entity.Plumber;
+import Entity.Saboteur;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -21,18 +22,18 @@ public class GamePanel extends JPanel implements Runnable {
     int FPS = 60;
     TileManager tileManager = new TileManager(this);
     Thread gameThread; //running the game on this thread
-    KeyHandler keyHandler = new KeyHandler();
-    Plumber plumber = new Plumber(this,keyHandler);
-    //set player's default position
-    int plumberX = 100;
-    int plumberY = 100;
-    int playerSpeed = 4;
+    PlumberKeyHandler PkeyHandler = new PlumberKeyHandler();
+    SaboteurKeyHandler SkeyHandler = new SaboteurKeyHandler();
+    Plumber plumber = new Plumber(this,PkeyHandler);
+    Saboteur saboteur = new Saboteur(this, SkeyHandler);
+
     public GamePanel(){
 
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
-        this.addKeyListener(keyHandler);
+        this.addKeyListener(PkeyHandler);
+        this.addKeyListener(SkeyHandler);
         this.setFocusable(true);
     }
     public void startGameThread(){
@@ -63,12 +64,14 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void Update(){
     plumber.update();
+    saboteur.update();
     }
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         tileManager.draw(g2);
         plumber.draw(g2);
+        saboteur.draw(g2);
         g2.dispose();
 
     }
