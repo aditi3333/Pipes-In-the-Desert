@@ -5,19 +5,26 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import main.KeyHandler;
+import main.PlumberKeyHandler;
 import main.GamePanel;
 
 
 public class Plumber extends Entity{
     GamePanel gp;
-    KeyHandler keyH;
+    PlumberKeyHandler keyH;
 
-    public Plumber(GamePanel gp, KeyHandler keyH){
+    public Plumber(GamePanel gp, PlumberKeyHandler keyH){
         this.gp = gp;
         this.keyH = keyH;
         setDefaultValues();
         getPlayerImage();
+    }
+    public void draw(Graphics2D g2){
+        //g2.setColor(Color.white);
+        //g2.fillRect(x,y,gp.tileSize,gp.tileSize );
+        BufferedImage image = null;
+        image = plumber;
+        g2.drawImage(image,x,y,gp.tileSize,gp.tileSize,null);
     }
     public void getPlayerImage(){
         try{
@@ -46,12 +53,5 @@ public class Plumber extends Entity{
         else if(keyH.rightPressed == true){
             x += speed;
         }
-    }
-    public void draw(Graphics2D g2){
-        //g2.setColor(Color.white);
-        //g2.fillRect(x,y,gp.tileSize,gp.tileSize );
-        BufferedImage image = null;
-        image = plumber;
-        g2.drawImage(image,x,y,gp.tileSize,gp.tileSize,null);
     }
 }

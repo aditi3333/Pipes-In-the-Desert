@@ -29,23 +29,4 @@ public class Main {
         gamePanel.startGameThread();
     }
 
-
-
-
-    /**
-     * displayMenu displays the main menu
-     */
-    private static void displayMenu() {
-        System.out.println("Enter your choice:");
-        System.out.println("1. Start Game");
-        System.out.println("2. Exit");
-        System.out.print("Choose an option: ");
-    }
-
-    /**
-     * playGame
-     */
-
-
-
 }
