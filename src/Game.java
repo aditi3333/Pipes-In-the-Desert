@@ -4,8 +4,8 @@ import java.util.Map;
 class Game {
     private boolean gameStarted;
     private boolean gameEnded;
-    private Map<Integer, Integer> plumberTeamMap; // Maps playerID to teamID for plumbers
-    private Map<Integer, Integer> saboteurTeamMap; // Maps playerID to teamID for saboteurs
+    private final Map<Integer, Integer> plumberTeamMap; // Maps playerID to teamID for plumbers
+    private final Map<Integer, Integer> saboteurTeamMap; // Maps playerID to teamID for saboteurs
 
     public Game() {
         gameStarted = false;

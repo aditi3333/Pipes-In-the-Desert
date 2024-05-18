@@ -1,20 +1,18 @@
-package tile;
+package Tile;
 
 import main.GamePanel;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.concurrent.ExecutionException;
 
 public class TileManager {
     GamePanel gp;
     Tile[] tile;
-    int mapTileNum[][];
+    int[][] mapTileNum;
     public TileManager(GamePanel gp) {
         this.gp = gp;
         tile = new Tile[9];
@@ -25,23 +23,23 @@ public class TileManager {
     public void getTileImage(){
         try{
             tile[0] = new Tile();
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/res/dessert.png"));
+            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/main/res/dessert.png"));
             tile[1] = new Tile();
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/res/cistern.png"));
+            tile[1].image = ImageIO.read(getClass().getResourceAsStream("/main/res/cistern.png"));
             tile[2] = new Tile();
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/res/pipe.png"));
+            tile[2].image = ImageIO.read(getClass().getResourceAsStream("/main/res/pipe.png"));
             tile[3] = new Tile();
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/res/pump.png"));
+            tile[3].image = ImageIO.read(getClass().getResourceAsStream("/main/res/pump.png"));
             tile[4] = new Tile();
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/res/brokepipe.png"));
+            tile[4].image = ImageIO.read(getClass().getResourceAsStream("/main/res/brokepipe.png"));
             tile[5] = new Tile();
-            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/res/brokepump.png"));
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("/main/res/brokepump.png"));
             tile[6] = new Tile();
-            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/res/spring.png"));
+            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/main/res/spring.png"));
             tile[7] = new Tile();
-            tile[7].image = ImageIO.read(getClass().getResourceAsStream("/res/watertank.png"));
+            tile[7].image = ImageIO.read(getClass().getResourceAsStream("/main/res/watertank.png"));
             tile[8] = new Tile();
-            tile[8].image = ImageIO.read(getClass().getResourceAsStream("/res/verticalpipe.png"));
+            tile[8].image = ImageIO.read(getClass().getResourceAsStream("/main/res/verticalpipe.png"));
 
         }
         catch(IOException e){
@@ -50,7 +48,7 @@ public class TileManager {
     }
     public void loadMap(){
         try{
-            InputStream is = getClass().getResourceAsStream("/res/map.txt");
+            InputStream is = getClass().getResourceAsStream("/main/res/map.txt");
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             int col = 0;
@@ -58,7 +56,7 @@ public class TileManager {
             while(col < gp.maxScreenCol && row <gp.maxScreenRow){
                 String line = br.readLine();
                 while (col< gp.maxScreenCol){
-                    String numbers[] = line.split(" ");
+                    String[] numbers = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                     col++;

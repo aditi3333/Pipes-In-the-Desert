@@ -30,7 +30,7 @@ class Cistern extends ActiveElement {
     }
 
     public Pipe manufacturePipe() {
-        ActiveElement newPipeEnds[] = new ActiveElement[2];
+        ActiveElement[] newPipeEnds = new ActiveElement[2];
         newPipeEnds[0] = this;
         newPipeEnds[1] = null;
         Pipe newPipe = new Pipe(false, 100, 20, newPipeEnds);

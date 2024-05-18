@@ -1,5 +1,5 @@
 class Player {
-    private int playerId;
+    private final int playerId;
     private int teamId;
 
     public Player(int playerId, int teamId) {

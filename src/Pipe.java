@@ -4,7 +4,7 @@ class Pipe extends PipeElement{
     private int capacity;
     private int currentVolume;
     private boolean hasFreeEnd;
-    private ActiveElement endElements[] = new ActiveElement[2];
+    private final ActiveElement[] endElements = new ActiveElement[2];
 
     public Pipe(boolean leaking, int capacity, int currentVolume, ActiveElement[] endElements) {
         super("pipe");
@@ -35,14 +35,7 @@ class Pipe extends PipeElement{
     private void updateHasFreeEnd()
     {
         System.out.println("updateHasFreeEnd()");
-        if(this.endElements[0] != null && this.endElements[1] != null)
-        {
-            this.hasFreeEnd = false;
-        }
-        else
-        {
-            this.hasFreeEnd = true;
-        }
+        this.hasFreeEnd = this.endElements[0] == null || this.endElements[1] == null;
     }
 
     public void changeEnd(ActiveElement e1, ActiveElement e2) {
@@ -56,7 +49,7 @@ class Pipe extends PipeElement{
     public Pipe splitPipe(Pump joiningPump) {
         // Method to split the pipe
         System.out.println("splitPipe(Pump joiningPump)");
-        ActiveElement newPipeEnds[] = new ActiveElement[2];
+        ActiveElement[] newPipeEnds = new ActiveElement[2];
         newPipeEnds[0] = joiningPump;
         newPipeEnds[1] = this.endElements[1];
         this.endElements[1] = joiningPump;
