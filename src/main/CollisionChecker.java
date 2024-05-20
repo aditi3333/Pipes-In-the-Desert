@@ -104,7 +104,7 @@ public class CollisionChecker {
             }
 
             if (entity1.solidarea.intersects(entity2.solidarea)) {
-                if (entity1.collision || entity2.collision) {
+                if (entity1.collision && entity2.collision) {
                     switch(entity1.direction)
                     {
                         case Directions.UP:

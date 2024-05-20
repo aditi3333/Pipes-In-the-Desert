@@ -26,7 +26,7 @@ public class PlumberGUI extends EntityGUI {
     public void update() {
         Tile tile = getTileFromEntity(0, 0);
 
-        entity.collision = Objects.equals(tile.name, "pump");
+        entity.collision = Objects.equals(tile.name, "pipe");
 
         if (keyH.upPressed) {
             entity.direction = Directions.UP;

@@ -126,7 +126,6 @@ public class Tile {
             return;
         }
 
-
         if(!Objects.equals(name, "desert") && !(Objects.equals(name, "pipe") && Objects.equals(pipeElement.name, "pump")))
         {
             return;
