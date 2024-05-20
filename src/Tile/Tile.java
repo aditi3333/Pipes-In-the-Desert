@@ -52,11 +52,11 @@ public class Tile {
         try {
             if(this.name.equals("boundary"))
             {
-                image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(STR."/main/res/desert.png")));
+                image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/res/desert.png")));
             }
             else
             {
-                image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(STR."/main/res/\{name}.png")));
+                image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/res/" + name + ".png")));
             }
         }
         catch(IOException e){
@@ -84,7 +84,7 @@ public class Tile {
                 break;
         }
         try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(STR."/main/res/\{name}.png")));
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/res/" + name + ".png")));
         }
         catch(IOException e){
             e.printStackTrace();
@@ -121,12 +121,13 @@ public class Tile {
     public void placePipeElement(PipeElement pipeElement)
     {
 
-        if(!Objects.equals(name, "desert") && !(Objects.equals(name, "pipe") && Objects.equals(pipeElement.name, "pump")))
+        if(pipeElement == null)
         {
             return;
         }
 
-        if(pipeElement == null)
+
+        if(!Objects.equals(name, "desert") && !(Objects.equals(name, "pipe") && Objects.equals(pipeElement.name, "pump")))
         {
             return;
         }
@@ -143,7 +144,7 @@ public class Tile {
                 break;
         }
         try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(STR."/main/res/\{name}.png")));
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/res/" + name + ".png")));
         }
         catch(IOException e){
             e.printStackTrace();
@@ -160,7 +161,7 @@ public class Tile {
         if(Objects.equals(name, "pipe") || Objects.equals(name, "pump"))
         {
             try {
-                image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(STR."/main/res/broken\{name}.png")));
+                image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/res/broken" + name + ".png")));
             }
             catch(IOException e){
                 e.printStackTrace();
@@ -177,7 +178,7 @@ public class Tile {
         if(Objects.equals(name, "pipe") || Objects.equals(name, "pump"))
         {
             try {
-                image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(STR."/main/res/\{name}.png")));
+                image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/main/res/" + name + ".png")));
             }
             catch(IOException e){
                 e.printStackTrace();
