@@ -1,5 +1,7 @@
+import main.Directions;
+
 class Player {
-    private int playerId;
+    private final int playerId;
     private int teamId;
 
     public Player(int playerId, int teamId) {
@@ -17,7 +19,7 @@ class Player {
         return teamId;
     }
 
-    public void move(Direction direction) {
+    public void move(Directions direction) {
 
         // Method to move the player in a given direction
         System.out.println("move(Direction direction)");

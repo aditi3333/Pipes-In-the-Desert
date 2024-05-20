@@ -37,6 +37,5 @@ class PipeElement {
     }
 
     public void print(){
-        return;
     }
 }

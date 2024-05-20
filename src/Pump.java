@@ -5,8 +5,8 @@ class Pump extends ActiveElement {
     private boolean works;
     private Pipe incomingPipe;
     private Pipe outgoingPipe;
-    private List<Pipe> connectedPipes;
-    private int maxPipes;
+    private final List<Pipe> connectedPipes;
+    private final int maxPipes;
 
     public Pump(boolean works, int maxPipes, List<Pipe> connectedPipes, Pipe incomingPipe, Pipe outgoingPipe)throws Exception {
         super("pump");

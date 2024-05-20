@@ -1,58 +1,62 @@
 package main;
 
-import Entity.Plumber;
+import GUI.PlumberGUI;
+import GUI.SaboteurGUI;
 import Entity.Saboteur;
-import tile.TileManager;
+import Tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable {
-    final int originalTileSize = 16;
+
+    final int originalTileSize = 20;
     final int scale = 3;
+
     //setting a single tile size by scaling it
-    public final int tileSize = originalTileSize*scale;
+    public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
-    //setting the width of screen and tilling itaw
+
+    //setting the width and height of the screen and tilling it
     public final int screenWidth = tileSize * maxScreenCol;
-    //setting the height of screen and tilling it
     final int screenHeight = tileSize * maxScreenRow;
+
     //FPS
     int FPS = 60;
-    TileManager tileManager = new TileManager(this);
+    public TileManager tileManager = new TileManager(this);
     Thread gameThread; //running the game on this thread
-    PlumberKeyHandler PkeyHandler = new PlumberKeyHandler();
-    SaboteurKeyHandler SkeyHandler = new SaboteurKeyHandler();
-    Plumber plumber = new Plumber(this,PkeyHandler);
-    Saboteur saboteur = new Saboteur(this, SkeyHandler);
+    KeyHandler keyHandler = new KeyHandler();
+    public PlumberGUI plumber = new PlumberGUI(this, keyHandler);
+    public SaboteurGUI saboteur = new SaboteurGUI(this, keyHandler);
+    public CollisionChecker collisionChecker = new CollisionChecker(this);
 
-    public GamePanel(){
-
-        this.setPreferredSize(new Dimension(screenWidth,screenHeight));
+    public GamePanel() {
+        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
-        this.addKeyListener(PkeyHandler);
-        this.addKeyListener(SkeyHandler);
+        this.addKeyListener(keyHandler);
+        this.addKeyListener(keyHandler);
         this.setFocusable(true);
     }
-    public void startGameThread(){
+
+    public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start(); //starting the game thread
     }
+
     @Override
     public void run() {
-        double drawInterval = 1000000000/FPS; //0.0666 seconds
+        double drawInterval = 1000000000 / FPS; //0.0666 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
-        while(gameThread!=null)
-        {
+        while (gameThread != null) {
 
             Update();
             repaint();
             try {
                 double remainingtime = nextDrawTime - System.nanoTime();
-                remainingtime = remainingtime /1000000; 
-                if(remainingtime < 0){
+                remainingtime = remainingtime / 1000000;
+                if (remainingtime < 0) {
                     remainingtime = 0;
                 }
                 Thread.sleep((long) remainingtime);
@@ -62,17 +66,18 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
     }
-    public void Update(){
-    plumber.update();
-    saboteur.update();
+
+    public void Update() {
+        plumber.update();
+        saboteur.update();
     }
-    public void paintComponent(Graphics g){
+
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         tileManager.draw(g2);
         plumber.draw(g2);
         saboteur.draw(g2);
         g2.dispose();
-
     }
 }
