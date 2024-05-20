@@ -37,13 +37,17 @@ public abstract class EntityGUI {
         g2.drawImage(image, entity.solidarea.x , entity.solidarea.y, entity.solidarea.width, entity.solidarea.height,null);
     }
 
-    public Tile getEntityTile()
+    public Tile getTileFromEntity(int col_offset, int row_offset)
     {
         int entityMiddleX = entity.solidarea.x + (entity.solidarea.width/2);
         int entityMiddleY = entity.solidarea.y + (entity.solidarea.height/2);
-        int entityMiddleRow = entityMiddleX / gp.tileSize;
-        int entityMiddleCol = entityMiddleY / gp.tileSize;
+        int entityMiddleCol = entityMiddleX / gp.tileSize;
+        int entityMiddleRow = entityMiddleY / gp.tileSize;
 
-        return gp.tileManager.tile[entityMiddleRow][entityMiddleCol];
+        if(gp.tileManager.tile.length < entityMiddleCol + col_offset)
+            return null;
+        if(gp.tileManager.tile[0].length < entityMiddleRow + row_offset)
+            return null;
+        return gp.tileManager.tile[entityMiddleCol + col_offset][entityMiddleRow + row_offset];
     }
 }

@@ -35,7 +35,7 @@ public class SaboteurGUI extends EntityGUI {
         }
 
         if (keyH.xPressed) {
-            Tile tile = getEntityTile();
+            Tile tile = getTileFromEntity(0, 0);
             tile.breakTile();
         }
 
