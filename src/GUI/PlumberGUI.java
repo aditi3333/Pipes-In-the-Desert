@@ -1,9 +1,12 @@
 package GUI;
 
 import Entity.Plumber;
+import Tile.Tile;
 import main.KeyHandler;
 import main.GamePanel;
 import main.Directions;
+
+import java.util.Objects;
 
 
 public class PlumberGUI extends EntityGUI {
@@ -12,19 +15,37 @@ public class PlumberGUI extends EntityGUI {
     public PlumberGUI(GamePanel gp, KeyHandler keyH) {
         super(gp, "/main/res/plumber.png");
         this.keyH = keyH;
-        entity = new Plumber();
+        int x = 7*gp.tileSize;
+        int y = 8*gp.tileSize;
+        int width = (int)(size*gp.tileSize);
+        int height = (int)(size*gp.tileSize);
+        entity = new Plumber(x, y, width, height);
     }
 
     @Override
     public void update() {
+        Tile tile = getEntityTile();
+
+        entity.collision = Objects.equals(tile.name, "pump");
+
         if (keyH.upPressed) {
-            entity.Move(Directions.UP);
+            entity.direction = Directions.UP;
         } else if (keyH.downPressed) {
-            entity.Move(Directions.DOWN);
+            entity.direction = Directions.DOWN;
         } else if (keyH.leftPressed) {
-            entity.Move(Directions.LEFT);
+            entity.direction = Directions.LEFT;
         } else if (keyH.rightPressed) {
-            entity.Move(Directions.RIGHT);
+            entity.direction = Directions.RIGHT;
+        }
+
+        if (keyH.pPressed) {
+            tile.fixTile();
+        }
+
+        if(keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+            entity.Move();
+            gp.collisionChecker.checkEntityEntity(entity, gp.saboteur.entity);
+            gp.collisionChecker.checktile(entity);
         }
     }
 }

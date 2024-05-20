@@ -2,31 +2,41 @@ package Entity;
 
 import main.Directions;
 
-import java.awt.image.BufferedImage;
+import java.awt.*;
 
 public class Entity {
-    public int x, y;
+    public final float size = 0.8f;
+    public Rectangle solidarea;
     public int speed;
+    public Directions direction = Directions.UP;
+    public boolean collision = false;
+    public boolean collisionOn = false;
 
-    Entity() {
-        x = 100;
-        y = 100;
+    Entity(int x, int y, int width, int height) {
+        solidarea = new Rectangle(x, y, width, height);
         speed = 4;
     }
 
-    public void Move(Directions direction) {
+    public void Move() {
+        if(collisionOn)
+        {
+            collisionOn = false;
+            return;
+        }
         switch (direction) {
             case Directions.UP:
-                y -= speed;
+                solidarea.y -= speed;
                 break;
             case Directions.DOWN:
-                y += speed;
+                solidarea.y += speed;
                 break;
             case Directions.LEFT:
-                x -= speed;
+                solidarea.x -= speed;
                 break;
             case Directions.RIGHT:
-                x += speed;
+                solidarea.x += speed;
+                break;
+            default:
                 break;
         }
     }

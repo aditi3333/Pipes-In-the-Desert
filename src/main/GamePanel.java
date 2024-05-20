@@ -24,11 +24,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     //FPS
     int FPS = 60;
-    TileManager tileManager = new TileManager(this);
+    public TileManager tileManager = new TileManager(this);
     Thread gameThread; //running the game on this thread
     KeyHandler keyHandler = new KeyHandler();
-    PlumberGUI plumber = new PlumberGUI(this, keyHandler);
-    SaboteurGUI saboteur = new SaboteurGUI(this, keyHandler);
+    public PlumberGUI plumber = new PlumberGUI(this, keyHandler);
+    public SaboteurGUI saboteur = new SaboteurGUI(this, keyHandler);
+    public CollisionChecker collisionChecker = new CollisionChecker(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
