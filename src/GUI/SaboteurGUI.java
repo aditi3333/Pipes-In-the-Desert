@@ -6,6 +6,8 @@ import main.GamePanel;
 import main.Directions;
 import Tile.Tile;
 
+import java.util.Objects;
+
 
 public class SaboteurGUI extends EntityGUI {
     GamePanel gp;
@@ -24,6 +26,10 @@ public class SaboteurGUI extends EntityGUI {
 
     @Override
     public void update() {
+        Tile tile = getTileFromEntity(0, 0);
+
+        entity.collision = Objects.equals(tile.name, "pipe");
+
         if (keyH.wPressed) {
             entity.direction = Directions.UP;
         } else if (keyH.sPressed) {
@@ -35,7 +41,6 @@ public class SaboteurGUI extends EntityGUI {
         }
 
         if (keyH.xPressed) {
-            Tile tile = getEntityTile();
             tile.breakTile();
         }
 

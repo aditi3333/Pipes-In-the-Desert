@@ -2,6 +2,12 @@ package PipeElement;
 
 public abstract class PipeElement {
     boolean broken = false;
+    public String name;
+
+    public PipeElement(String name)
+    {
+        this.name = name;
+    }
 
     public boolean getBrokenStatus()
     {

@@ -9,7 +9,8 @@ public class Main {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("Pipes in Desert");
-        GamePanel gamePanel = new GamePanel();
+        CountdownTimer timer = new CountdownTimer();
+        GamePanel gamePanel = new GamePanel(timer);
         window.add(gamePanel);
 
         window.pack();

@@ -61,7 +61,8 @@ public class TileManager {
                         case 4:
                             tile[col][row] = new Tile("spring");
                             break;
-
+                        case 5:
+                            tile[col][row] = new Tile("boundary");
                     }
                     col++;
                 }

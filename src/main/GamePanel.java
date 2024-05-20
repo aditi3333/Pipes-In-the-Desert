@@ -2,8 +2,10 @@ package main;
 
 import GUI.PlumberGUI;
 import GUI.SaboteurGUI;
-import Entity.Saboteur;
 import Tile.TileManager;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,10 +15,14 @@ public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 20;
     final int scale = 3;
 
+    CountdownTimer timer;
+
     //setting a single tile size by scaling it
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
+
+    public int gameState = 0;
 
     //setting the width and height of the screen and tilling it
     public final int screenWidth = tileSize * maxScreenCol;
@@ -31,7 +37,8 @@ public class GamePanel extends JPanel implements Runnable {
     public SaboteurGUI saboteur = new SaboteurGUI(this, keyHandler);
     public CollisionChecker collisionChecker = new CollisionChecker(this);
 
-    public GamePanel() {
+    public GamePanel(CountdownTimer timer) {
+        this.timer = timer;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -68,8 +75,16 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void Update() {
-        plumber.update();
-        saboteur.update();
+        if(timer.seconds <= 0)
+        {
+            timer.seconds = 0;
+            gameState = 1;
+        }
+        if(gameState == 0)
+        {
+            plumber.update();
+            saboteur.update();
+        }
     }
 
     public void paintComponent(Graphics g) {
@@ -78,6 +93,22 @@ public class GamePanel extends JPanel implements Runnable {
         tileManager.draw(g2);
         plumber.draw(g2);
         saboteur.draw(g2);
+        Graphics2D gg = (Graphics2D) g;
+        gg.setFont(new Font("Impact", Font.PLAIN, 30));
+        String text = "Time remaining: " + timer.seconds;
+        int x = tileSize * 6;
+        int y = tileSize;
+        gg.setColor(Color.black);
+        gg.drawString(text, x, y - 20);
+
+        if(gameState == 1)
+        {
+            String text2 = "Game over";
+            int x2 = tileSize * 6;
+            int y2 = tileSize * 2;
+            gg.setColor(Color.black);
+            gg.drawString(text2, x2, y2 - 20);
+        }
         g2.dispose();
     }
 }
